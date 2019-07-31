@@ -10,8 +10,8 @@ const CollectionItem = ({id, name, price, imageUrl}) => (
             }}
         />
         <div className='collection-footer'>
-            <spam className='name'>{name}</spam>
-            <spam className='price'>{price}</spam>
+            <span className='name'>{name}</span>
+            <span className='price'>{price}</span>
         </div>       
     </div>
 )
