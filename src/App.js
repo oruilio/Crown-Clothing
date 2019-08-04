@@ -23,10 +23,13 @@ class App extends React.Component {
   componentDidMount(){
     const {setCurrentUser} = this.props;
 
+    //param userAuth comes from firebase, meaning sb login, onAuthStateChanged is an open function, so we need to close it when the app unmount
     this.unsubsribeFromAuth = auth.onAuthStateChanged( async userAuth => {
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
         
+        //to check whether our database has updated at userRef with any new data
+        //keep listening
         userRef.onSnapshot(snapShot => {
           setCurrentUser({
             id: snapShot.id,
