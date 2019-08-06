@@ -38,6 +38,17 @@ export const createUserProfileDocument = async (userAuth, additionalData ) => {
     return userRef;
 }
 
+export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
+    const collectionRef = firestore.collection(collectionKey);
+    const batch = firestore.batch();  //used to group all our calls together into one big request, incase our request is stopped halfway
+
+    objectsToAdd.forEach(obj => {
+      const newDocRef = collectionRef.doc(); //get a new document reference in this collection and randomly generate the ID (documents at an empty string)
+      batch.set(newDocRef, obj);
+    });
+  
+    return await batch.commit();  //return null
+};
 
 firebase.initializeApp(config);
 
