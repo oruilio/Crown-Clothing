@@ -25,9 +25,11 @@ class ShopPage extends React.Component{
     const { updateCollections } = this.props
     const collectionRef = firestore.collection('collections');
     
-    //whenever the collectionRef updates or whenever this code gets run for the first time
-    //collectionRef will send us the snapshot representing the code of our collection array at the time when this code renders
-    this.unsubscribeFromSnapshot = collectionRef.onSnapshot(async snapshot => {
+    //fetch('https://firestore.googleapis.com/v1/projects/crwn-db-c5d37/databases/(default)/documents/collections')
+    //.then(response => response.json())
+    
+    //we no longer leveraging the live updates stream style of the observable pattern
+    collectionRef.get().then(snapshot => {
       const collectionsMap = convertCollectionsSnapshotToMap(snapshot);
       updateCollections(collectionsMap);
       this.setState({ loading:false })
