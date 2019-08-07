@@ -53,16 +53,23 @@ export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => 
 //Array of objects -> map with routing property
 //param: collectionSnapshot
 export const convertCollectionsSnapshotToMap = collections => {
+    
     const transformedCollection = collections.docs.map(doc => {
-      const { title, items } = doc.data();
+    const { title, items } = doc.data();
   
-      return {
+    return {
         routeName: encodeURI(title.toLowerCase()),
         id: doc.id,
         title,
         items
       };
     });
+
+    //make collection.title.toLowerCase() as index, and collection value as the value
+    return transformedCollection.reduce((accumulator, collection) => {
+        accumulator[collection.title.toLowerCase()] = collection;
+        return accumulator;
+    }, {});
 } 
 
 firebase.initializeApp(config);
