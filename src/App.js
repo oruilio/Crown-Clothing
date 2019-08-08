@@ -40,6 +40,7 @@ class App extends React.Component {
       else{
         setCurrentUser(userAuth);
       }
+      //execute only one time:
       //addCollectionAndDocuments('collections', collectionsArray.map(({title, items}) => ({title, items})));
     })
   }
