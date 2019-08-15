@@ -1,0 +1,14 @@
+.contact-page {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 30px;
+    text-align: center;
+
+    .content{
+        font-size: 20px;
+        margin-top: 60px;  
+    }
+    .content2{
+        font-size: 18px;
+    }
+}
